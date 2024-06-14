@@ -1,7 +1,10 @@
 package rotas
 
-import "net/http"
+import (
+	"net/http"
 
+	"github.com/gorilla/mux"
+)
 
 //ROta representa todas as rotas da API
 type Rota struct {
@@ -11,4 +14,15 @@ type Rota struct {
 	RequerAutenticacao bool
 }
 
-func _()
+// COnfigurar coloca todas as rotas dentro do router
+func Configurar(r *mux.Router) *mux.Router{
+
+
+	rotas := rotasUsuarios
+
+	for _,rota := range rotas{
+		r.HandleFunc(rota.Uri,rota.Funcao).Methods(rota.Metodo)
+	}
+
+	return r
+}
